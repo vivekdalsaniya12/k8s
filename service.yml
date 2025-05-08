@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ngnix-service
+  namespace: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    targetPort: 80 # container/pod  port
+    port: 80  # host post
+  type: NodePort # NordPord or  

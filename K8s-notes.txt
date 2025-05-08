@@ -1,0 +1,64 @@
+# create cluster my-cluster1
+--> kind create cluster --image < image-name > --name my-cluster1
+
+
+# create cluster-config.yml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+
+
+# create cluster my-cluster2
+---> kind create cluster --image < image-name > --name my-cluster2 --config cluster-config.yml
+
+
+# switch cluster my-cluster to my-cluster2 
+---> kubectl config get-contexts
+---> kubectl config use-context my-cluster2
+
+#how to write .yml file
+--------------------------
+# use for comment
+employee:
+  name: vivek
+  age: 20
+  adress: amreli
+  
+employee:
+- name: vivek
+  age: 20
+  adress: amreli
+- name: dhruvit
+  age: 20
+  adress: keriya
+  
+# helper command to write .yml file
+
+---> kubectl explain pod
+---> kubectl explain deployment
+
+# sample pod.yml
+kind: Pod
+apiVersion: v1
+metadata: 
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    
+---> kubectl describe pod <pod-name>
+---> kubectl exec -it < pod-name > -- sh
+---> kubectl exec -it < pod-name > -- bash
+---> kubectl run nginx --image=nginx --dry-run=client
+---> kubectl run nginx --image=nginx --dry-run=client -o yaml > new_pod.yml
+---> kubectl get pods nginx-pod --show-labels
+---> kubectl get pods -o wide
+---> kubectl get nodes -o wide
